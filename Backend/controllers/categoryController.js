@@ -5,7 +5,7 @@ const Category = db.Category;
 exports.categoryList = async function (req, res) {
     await Category.findAll({ include: [{model: Game, as:'games'}] })
         .then(data => {
-            console.log("All agencies:", JSON.stringify(data, null, 2));
+            console.log("All categories:", JSON.stringify(data, null, 2));
             res.json(data);
         })
         .catch(err => {
