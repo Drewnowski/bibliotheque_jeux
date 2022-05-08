@@ -8,12 +8,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GamesComponent } from './games/games.component';
 import { GameEditComponent } from './game-edit/game-edit.component';
+import { GameAddComponent } from './game-add/game-add.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GamesComponent,
-    GameEditComponent
+    GameEditComponent,
+    GameAddComponent
   ],
   imports: [
     BrowserModule,

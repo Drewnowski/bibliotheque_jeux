@@ -39,7 +39,7 @@ export class RestService {
   getGames(): Observable<Game[]> {
     return this.http.get<Game[]>(endpoint + 'games');
   }
-  CreateGame(game:Game): Observable<any> {
+  createGame(game:Game): Observable<any> {
     console.log(game);
     return this.http.post<Game>(endpoint + 'game', game);
   }
@@ -57,7 +57,7 @@ export class RestService {
   getCategorys(): Observable<Category[]> {
     return this.http.get<Category[]>(endpoint + 'categories');
   }
-  CreateCategory(category:Category): Observable<any> {
+  createCategory(category:Category): Observable<any> {
     console.log(category);
     return this.http.post<Category>(endpoint + 'category', category);
   }
@@ -75,7 +75,7 @@ export class RestService {
   getPlatforms(): Observable<Platform[]> {
     return this.http.get<Platform[]>(endpoint + 'platforms');
   }
-  CreatePlatform(platform:Platform): Observable<any> {
+  createPlatform(platform:Platform): Observable<any> {
     console.log(platform);
     return this.http.post<Platform>(endpoint + 'platform', platform);
   }
