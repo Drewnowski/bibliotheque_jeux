@@ -1,1 +1,11 @@
-<p>games works!</p>
+<h2>Games list</h2>
+<ul>
+    <li *ngFor="let g of games">
+        {{g.name}}
+        <button routerLink="/game_edit/{{g.game_id}}">Edit</button>
+        <button (click)="deleteGame(g.game_id)">Delete</button>
+    </li>
+</ul>
+<div>
+    <button (click)="add()">Create</button>
+</div>
