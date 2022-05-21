@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable,throwError } from 'rxjs';
+import { Observable,throwError,map } from 'rxjs';
 
 const endpoint = "http://localhost:8000/";
 
@@ -11,6 +11,9 @@ export interface Game{
   description: string;
   cost: number;
   memory: number;
+  platforms: Platform[];
+  categories: Category[];
+
 }
 
 //Interface category
@@ -18,6 +21,7 @@ export interface Category{
   category_id: number;
   name: string;
   description: string;
+  games: Game[];
 }
 
 //Interface platforms
@@ -25,6 +29,7 @@ export interface Platform{
   platform_id: number;
   name: string;
   description: string;
+  games: Game[];
 }
 
 @Injectable({
@@ -47,14 +52,15 @@ export class RestService {
     return this.http.put<Game>(endpoint + 'game/' + game.game_id, game);
   }
   deleteGame(id: number): Observable<any> {
-    return this.http.delete<Game>(endpoint + 'game/' + id);
+    return this.http.delete<Game>('http://localhost:8000/game/' + id);
+      // endpoint + 'game/' + id);
   }
   getGame(id: number): Observable<any> {
-    return this.http.get<Game>(endpoint + "game/find/"+ id);
+    return this.http.get<Game>(endpoint + 'game/find/' + id);
   }
   
   // http methods of categories
-  getCategorys(): Observable<Category[]> {
+  getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(endpoint + 'categories');
   }
   createCategory(category:Category): Observable<any> {

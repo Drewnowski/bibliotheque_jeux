@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class GameEditComponent implements OnInit {
 
   game = {} as Game;
+  //game : Game | undefined;
 
   constructor(public rest:RestService, private route: ActivatedRoute, private router: Router) { }
 
@@ -24,7 +25,7 @@ export class GameEditComponent implements OnInit {
 
   updateGame() {
     this.rest.updateGame(this.game).subscribe(
-      (result) =>{
+      (result)=> {
         this.router.navigate(['/games']);
       },
       (err) => {

@@ -1,11 +1,55 @@
-<h2>Games list</h2>
-<ul>
-    <li *ngFor="let g of games">
-        {{g.name}}
-        <button routerLink="/game_edit/{{g.game_id}}">Edit</button>
-        <button (click)="deleteGame(g.game_id)">Delete</button>
-    </li>
-</ul>
-<div>
-    <button (click)="add()">Create</button>
+<div class="games">
+    <h2>Games list</h2>
+    <form>Type
+        <input id="valuetofind" type="text" name="text">
+        <input type="submit" value="Find" (click)="findGameByName()">
+    </form>
+    <ul>
+        <li *ngFor="let fg of filtredGames">
+            {{fg.name}}
+        </li>
+    </ul>
+    <ul>
+        <li *ngFor="let pg of platformGames">
+            {{pg.name}}
+        </li>
+    </ul>
+    <ul>
+        <li *ngFor="let cg of categoryGames">
+            {{cg.name}}
+        </li>
+    </ul>
+    <ul>
+        <li *ngFor="let cpg of catPlatGames">
+            {{cpg.name}}
+        </li>
+    </ul>
+    <ul>
+        <li *ngFor="let g of games">
+            {{g.name}}
+            <button routerLink="/game_edit/{{g.game_id}}">Edit</button>
+            <button (click)="deleteGame(g.game_id)">Delete</button>
+        </li>
+    </ul>
+</div>
+<div class="left">
+    <h2>Platforms</h2>
+    <ul>
+        <li *ngFor="let p of platforms">
+            <button class="btnlistP" (click)="getplatformGames(p)">{{p.name}}</button>
+        </li>
+    </ul>
+</div>
+<div class="left">
+    <h2>Categories</h2>
+    <ul>
+        <li *ngFor="let c of categories">
+            <button class="btnlistC" (click)="getCategoryGames(c)">{{c.name}}</button>
+            
+        </li>
+    </ul>
+</div>
+
+<div class="btn">
+    <button (click)="add()">Add new Game</button>
 </div>

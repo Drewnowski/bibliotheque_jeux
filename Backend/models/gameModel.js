@@ -10,7 +10,7 @@ const Game = db.define('game', {
     },
     name: { type: Sequelize.STRING, allowNull: false },
     description: { type: Sequelize.STRING, allowNull: true },
-    cost: { type: Sequelize.INTEGER, allowNull: false },
+    cost: { type: Sequelize.INTEGER, allowNull: true },
     memory: { type: Sequelize.INTEGER, allowNull: true} 
 })
 

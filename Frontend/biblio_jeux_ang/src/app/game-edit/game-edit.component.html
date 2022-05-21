@@ -1,9 +1,13 @@
 <div>
-    <h2>Game Edit</h2>
+    <h1>Game Edit</h1>
+    <h3>Game Name</h3>
     <input type="text" [(ngModel)] = "game.name" placeholder="Name"><br>
+    <h3>Game description</h3>
     <input type="text" [(ngModel)] = "game.description" placeholder="Description"><br>
+    <h3>Cost</h3>
     <input type="number" [(ngModel)] = "game.cost" placeholder="Cost"><br>
+    <h3>Memory needed</h3>
     <input type="number" [(ngModel)] = "game.memory" placeholder="Memory"><br>
-    <button (click)="updateGame()">Update</button>
+    <button (click)="updateGame()">Add</button>
     <button (click)="cancelEdit()">Cancel</button>
 </div>

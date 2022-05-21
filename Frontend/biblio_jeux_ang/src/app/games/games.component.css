@@ -1,0 +1,23 @@
+
+/* div {
+    display: flexbox;
+    padding: 10px;
+    border: 3px solid #3821ad;
+}
+.games {
+    clear: left;
+    width: 750px;
+}
+
+.left {
+    clear: right;
+
+}
+ */
+ .btnlistP { background:none; border:none; }
+ .btnlistP:focus { background:rgb(173, 89, 251); border:none; }
+ 
+ .btnlistC { background:none; border:none; }
+ /* .btnlistC:active { background:rgb(173, 89, 251); border:none; } */
+
+ 
