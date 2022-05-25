@@ -9,18 +9,29 @@
     <h3>Memory needed</h3>
     <input type="number" [(ngModel)] = "game.memory" placeholder="Memory"><br>
     <h3>Categories :</h3>
-    <ul>
-        <li *ngFor="let gc of game.categories">
-            {{gc.name}}
-            <button class="btnlistCategorytoRemove" (click)="deleteCategoryFromGame(gc.category_id)">{{gc.name}}</button>
-            
-        </li>
-    </ul>
+    <div>
+        <ul>
+            <li *ngFor="let gtc of category_to_change">
+                {{gtc.name}}
+                <button  (click)="updateCategoryToRemove(gtc.category_id)">Remove</button>
+                
+            </li>
+        </ul>
+    </div>
+    <div>
+        <ul>
+            <li *ngFor="let gc of game.categories">
+                {{gc.name}}
+                <!-- <button  (click)="updateCategoryToRemove(gc.category_id)">{{gc.name}}</button> -->
+                
+            </li>
+        </ul>
+    </div>
     <h3>Platforms :</h3>
     <ul>
         <li *ngFor="let gp of game.platforms">
             {{gp.name}}
-            <button class="btnlistPlatformtoRemove" (click)="deletePlatformFromGame(gp.platform_id)">{{gp.name}}</button> 
+            <button (click)="updatePlatformsToRemove(gp.platform_id)">{{gp.name}}</button> 
         </li>
     </ul>
     
@@ -29,6 +40,7 @@
 <div>
     <button (click)="updateGame()">Save</button>
     <button (click)="cancelEdit()">Cancel</button>
+    <button (click)="test()">Test</button>
 </div>
 
 <div class="right">
@@ -39,9 +51,7 @@
     </form>
     <ul>
         <li *ngFor="let fc of filtred_categories">
-
-            <button class="btnlistCategory" (click)="updateCategoryToAdd(fc)">{{fc.name}}</button>
-            
+            <button (click)="updateCategoryToAdd(fc)">{{fc.name}}</button>
         </li>
     </ul>
 </div>
@@ -54,8 +64,7 @@
     </form>
     <ul>
         <li *ngFor="let fp of filtred_platforms">
-            <button class="btnlistC" (click)="updatePlatformToAdd(fp)">{{fp.name}}</button>
-            
+            <button (click)="updatePlatformsToAdd(fp)">{{fp.name}}</button>
         </li>
     </ul>
 </div>

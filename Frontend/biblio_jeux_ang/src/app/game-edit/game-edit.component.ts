@@ -11,9 +11,11 @@ export class GameEditComponent implements OnInit {
 
   game = {} as Game;
   platform = {} as Platform;
+  platform_to_change: Platform[] = [];
   filtred_platforms: Platform[] = [];
 
   category = {} as Category;
+  category_to_change: Category[] = [];
   filtred_categories: Category[] = [];
 
   constructor(public rest:RestService, private route: ActivatedRoute, private router: Router) { }
@@ -23,12 +25,22 @@ export class GameEditComponent implements OnInit {
       (data)=> {
         console.log(data);
         this.game = data;
+
+        data["categories"].forEach((cat: Category)=>{
+          this.category_to_change.push(cat)
+        })
+
+        data["platforms"].forEach((plat: Platform)=>{
+          this.platform_to_change.push(plat)
+        })
+
+        
       }
     )
   }
 
-  updateGame() {
 
+  updateGame() {
     this.rest.updateGame(this.game).subscribe(
       (result)=> {
         this.router.navigate(['/games']);
@@ -38,7 +50,6 @@ export class GameEditComponent implements OnInit {
       }
     )
   }
-
   
   getFiltredCategory(){
     this.rest.getFiltredCategory((<HTMLInputElement>document.getElementById("categorytofind")).value).subscribe(
@@ -57,31 +68,60 @@ export class GameEditComponent implements OnInit {
     )
     );
   }
-  deleteCategoryFromGame(id:number){
-    this.game.categories = this.game.categories.filter((category: Category) => category.category_id !== id);
+  updateCategoryToRemove(id:number){
+    this.category_to_change = this.category_to_change.filter((category: Category) => category.category_id !== id);
   }
-  deletePlatformFromGame(id:number){
-    this.game.platforms = this.game.platforms.filter((platform: Platform) => platform.platform_id !== id);
+  updatePlatformsToRemove(id:number){
+    this.platform_to_change = this.platform_to_change.filter((platform: Platform) => platform.platform_id !== id);
   }
   
   updateCategoryToAdd(category: Category){
-    var index = this.game.categories.findIndex(x => x.name == category.name);
-    index === -1 ? this.game.categories.push(category) : console.log("this category already exists")
+    var index = this.category_to_change.findIndex(indexToAdd => indexToAdd.name == category.name);
+    index === -1 ? this.category_to_change.push(category) : console.log("this category already exists")
   }
-  updatePlatformToAdd(platform: Platform){
-    var index = this.game.platforms.findIndex(x => x.name == platform.name);
-    index === -1 ? this.game.platforms.push(platform) : console.log("this category already exists")
+  updatePlatformsToAdd(platform: Platform){
+    var index = this.platform_to_change.findIndex(x => x.name == platform.name);
+    index === -1 ? this.platform_to_change.push(platform) : console.log("this category already exists")
   }
-  gameAddCategory(){
-    this.rest.gameAddCategory(this.game.game_id,this.category).subscribe();
+
+  gameAddCategory(category:Category){
+    this.rest.gameAddCategory(this.game.game_id,category).subscribe();
   }
-  gameAddPlatform(){
+  gameAddPlatform(platform:Platform){
     this.rest.gameAddPlatform(this.game.game_id,this.platform).subscribe();
+  }
+
+  gameRemoveCategory(category_to_r:Category){
+    this.rest.gameRemoveCategory(this.game.game_id,category_to_r).subscribe();
+  }
+  gameRemovePlatform(platform: Platform){
+    this.rest.gameRemovePlatform(this.game.game_id,this.platform).subscribe();
   }
 
   cancelEdit() {
     this.router.navigate(['/games']);
   }
 
+  test(){
+    this.category_to_change.forEach((category_to_change) => {
+      var index = this.game.categories.findIndex(x => x.category_id == category_to_change.category_id);
+      index === -1 ? this.gameAddCategory(category_to_change) : console.log("this category already exists")
+    })
+
+    this.game.categories.forEach((category) => {
+      var index = this.category_to_change.findIndex(xx => xx.category_id == category.category_id);
+      index === -1 ? this.gameRemoveCategory(category) : console.log("this category already exists")
+    })
+    //Update platforms list
+    this.platform_to_change.forEach((platform_to_ch) => {
+      var index = this.game.platforms.findIndex(x => x.platform_id == platform_to_ch.platform_id);
+      index === -1 ? this.gameAddPlatform(platform_to_ch) : console.log("this category already exists")
+    })
+
+    this.game.platforms.forEach((platform) => {
+      var index = this.platform_to_change.findIndex(xx => xx.platform_id == platform.platform_id);
+      index === -1 ? this.gameRemovePlatform(platform) : console.log("this category already exists")
+    })
+  }
 }
 

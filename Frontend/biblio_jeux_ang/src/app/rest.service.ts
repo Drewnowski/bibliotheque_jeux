@@ -64,6 +64,12 @@ export class RestService {
   gameAddPlatform(id:number, platform: Platform): Observable<any> {
     return this.http.post<Category>(endpoint + 'game/addPlatform/' + id, platform);
   }
+  gameRemoveCategory(id:number, category: Category): Observable<any> {
+    return this.http.post<Category>(endpoint + 'game/removeCategory/' + id, category);
+  }
+  gameRemovePlatform(id:number, platform: Platform): Observable<any> {
+    return this.http.post<Category>(endpoint + 'game/removePlatform/' + id, platform);
+  }
 
   
   // http methods of categories
