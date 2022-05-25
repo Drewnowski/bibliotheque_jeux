@@ -8,6 +8,57 @@
     <input type="number" [(ngModel)] = "game.cost" placeholder="Cost"><br>
     <h3>Memory needed</h3>
     <input type="number" [(ngModel)] = "game.memory" placeholder="Memory"><br>
-    <button (click)="updateGame()">Add</button>
+    <h3>Categories :</h3>
+    <ul>
+        <li *ngFor="let gc of game.categories">
+            {{gc.name}}
+            <button class="btnlistCategorytoRemove" (click)="deleteCategoryFromGame(gc.category_id)">{{gc.name}}</button>
+            
+        </li>
+    </ul>
+    <h3>Platforms :</h3>
+    <ul>
+        <li *ngFor="let gp of game.platforms">
+            {{gp.name}}
+            <button class="btnlistPlatformtoRemove" (click)="deletePlatformFromGame(gp.platform_id)">{{gp.name}}</button> 
+        </li>
+    </ul>
+    
+</div>
+
+<div>
+    <button (click)="updateGame()">Save</button>
     <button (click)="cancelEdit()">Cancel</button>
 </div>
+
+<div class="right">
+    <h2>Categories</h2>
+    <form>Enter the category name
+        <input id="categorytofind" type="text" name="text">
+        <input type="submit" value="Find" (click)="getFiltredCategory()">
+    </form>
+    <ul>
+        <li *ngFor="let fc of filtred_categories">
+
+            <button class="btnlistCategory" (click)="updateCategoryToAdd(fc)">{{fc.name}}</button>
+            
+        </li>
+    </ul>
+</div>
+
+<div class="right">
+    <h2>Platforms</h2>
+    <form>Enter the platform name
+        <input id="platformtofind" type="text" name="text">
+        <input type="submit" value="Find" (click)="getFiltredPlatforms()">
+    </form>
+    <ul>
+        <li *ngFor="let fp of filtred_platforms">
+            <button class="btnlistC" (click)="updatePlatformToAdd(fp)">{{fp.name}}</button>
+            
+        </li>
+    </ul>
+</div>
+
+
+

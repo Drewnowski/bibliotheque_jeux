@@ -29,7 +29,8 @@ exports.gameCreate = async (req, res) => {
 
 exports.gameUpdate = async function (req, res) {
     if (req.params.game_id > 0) {
-        await Game.update({ where: { game_id: req.params.game_id } }//{ name: req.body.name, description: req.body.description },
+        await Game.update({name: req.body.name, description: req.body.description, cost: req.body.cost, memory: req.body.memory, categories: req.body.categories, platforms: req.body.platforms},
+            { where: { game_id: req.params.game_id } }
         )
             .then(data => {
                 res.json(data);
@@ -80,6 +81,19 @@ exports.gameAddPlatform = async function (req, res) {
     }
     else res.status(400).json({ message: 'Game not found' })
 }
+exports.gameRemovePlatform = async function (req, res) {
+    if (req.params.game_id) {
+        await Game.findOne({ where: { game_id: req.params.game_id } })
+            .then(game => {
+                game.removePlatform(req.body.platform_id).then(()=> {
+                    res.json({message: 'Done'})
+                })
+            }).catch(err => {
+                res.status(500).json({ message: err.message })
+            })
+    }
+    else res.status(400).json({ message: 'Game not found' })
+}
 
 exports.gameAddCategory = async function (req, res) {
     if (req.params.game_id) {
@@ -94,7 +108,20 @@ exports.gameAddCategory = async function (req, res) {
     }
     else res.status(400).json({ message: 'Game not found' })
 }
-/*
+exports.gameRemoveCategory = async function (req, res) {
+    if (req.params.game_id) {
+        await Game.findOne({ where: { game_id: req.params.game_id } })
+            .then(game => {
+                game.removeCategory(req.body.category_id).then(()=> {
+                    res.json({message: 'Done'})
+                })
+            }).catch(err => {
+                res.status(500).json({ message: err.message })
+            })
+    }
+    else res.status(400).json({ message: 'Game not found' })
+}
+
 
 const { Op } = require("sequelize");
 exports.gameFindOp = async function (req, res) {
@@ -111,7 +138,7 @@ where: {name:{ [Op.like]: 'Gothic 1'}}})//[Op.gt]: 2, [Op.lt]: 9//[Op.startsWith
 exports.gameUpdate = async function (req, res) {
     if (req.params.game_id > 0) {
         await Game.update(
-            { name: req.body.name }, 
+            { name: req.body.name, description: req.body.description, cost: req.body.cost, memory: req.body.memory, categories: req.body.categories, platforms: req.body.platforms }, 
             { where: { game_id: req.params.game_id } }
             )
             .then(data => {
@@ -136,7 +163,7 @@ exports.gameDelete = async function (req, res) {
     }
     else res.status(400).json({ message: 'Game not found'})
 }
-*/
+
 // exports.gameFindOne = async function (req, res) {
 //     if (req.params.game_id) {
 //         await Game.findOne({ where: { game_id: req.params.game_id } })

@@ -18,6 +18,8 @@ router.get('/game/find/:game_id', gameController.gameFindOne);
 // router.get('/game/filter', gameController.gameFindOp);
 router.post('/game/addCategory/:game_id', gameController.gameAddCategory);
 router.post('/game/addPlatform/:game_id', gameController.gameAddPlatform);
+router.post('/game/removePlatform/:game_id', gameController.gameRemovePlatform);
+router.post('/game/removeCategory/:game_id', gameController.gameRemoveCategory);
 
 // category routes 
 router.get('/categories', categoryController.categoryList);

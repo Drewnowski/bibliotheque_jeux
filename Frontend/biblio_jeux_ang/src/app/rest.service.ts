@@ -58,6 +58,13 @@ export class RestService {
   getGame(id: number): Observable<any> {
     return this.http.get<Game>(endpoint + 'game/find/' + id);
   }
+  gameAddCategory(id:number, category: Category): Observable<any> {
+    return this.http.post<Category>(endpoint + 'game/addCategory/' + id, category);
+  }
+  gameAddPlatform(id:number, platform: Platform): Observable<any> {
+    return this.http.post<Category>(endpoint + 'game/addPlatform/' + id, platform);
+  }
+
   
   // http methods of categories
   getCategories(): Observable<Category[]> {
@@ -76,6 +83,9 @@ export class RestService {
   getCategory(id: number): Observable<any> {
     return this.http.get<Category>(endpoint + "category/find/"+ id);
   }
+  getFiltredCategory(name: string): Observable<any> {
+    return this.http.get<Category[]>(endpoint + "category/filter/"+ name);
+  }
 
   // http methods of platforms
   getPlatforms(): Observable<Platform[]> {
@@ -93,6 +103,9 @@ export class RestService {
   }
   getPlatform(id: number): Observable<any> {
     return this.http.get<Platform>(endpoint + "platform/find/"+ id);
+  }
+  getFiltredPlatforms(name: string): Observable<any> {
+    return this.http.get<Platform[]>(endpoint + "platform/filter/"+ name);
   }
   
 }
