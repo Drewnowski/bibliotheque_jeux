@@ -68,10 +68,10 @@ exports.gameFindOne = async function (req, res) {
 }
 
 exports.gameAddPlatform = async function (req, res) {
-    if (req.params.platform_id) {
+    if (req.params.game_id) {
         await Game.findOne({ where: { game_id: req.params.game_id } })
-            .then(platform => {
-                platform.addGame(req.body.game_id).then(()=> {
+            .then(game => {
+                game.addPlatform(req.body.platform_id).then(()=> {
                     res.json({message: 'Done'})
                 })
             }).catch(err => {
@@ -80,6 +80,21 @@ exports.gameAddPlatform = async function (req, res) {
     }
     else res.status(400).json({ message: 'Game not found' })
 }
+
+exports.gameAddCategory = async function (req, res) {
+    if (req.params.game_id) {
+        await Game.findOne({ where: { game_id: req.params.game_id } })
+            .then(game => {
+                game.addCategory(req.body.category_id).then(()=> {
+                    res.json({message: 'Done'})
+                })
+            }).catch(err => {
+                res.status(500).json({ message: err.message })
+            })
+    }
+    else res.status(400).json({ message: 'Game not found' })
+}
+/*
 
 const { Op } = require("sequelize");
 exports.gameFindOp = async function (req, res) {
@@ -121,7 +136,7 @@ exports.gameDelete = async function (req, res) {
     }
     else res.status(400).json({ message: 'Game not found'})
 }
-
+*/
 // exports.gameFindOne = async function (req, res) {
 //     if (req.params.game_id) {
 //         await Game.findOne({ where: { game_id: req.params.game_id } })

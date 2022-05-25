@@ -83,20 +83,19 @@ exports.categoryAddGame = async function (req, res) {
 
 const { Op } = require("sequelize");
 exports.categoryFindOp = async function (req, res) {
-    await Category.findAll({
-        where: {
-            category_id:
-                { [Op.gt]: 2, [Op.lt]: 9 }
-        }
-    })
-        .then(data => {
-            res.json(data);
-        })
-        .catch(err => {
-            res.status(500).json({ message: err.message })
-        })
+    if (req.params.name) {
+        await Category.findAll({
+            where: {name:{ [Op.startsWith]: req.params.name}}})
+            .then(data => {
+                res.json(data);
+            })
+            .catch(err => {
+                res.status(500).json({ message: err.message })
+            })
+    }
+    else res.status(400).json({ message: 'Bad input' })
 }
-
+/*
 exports.categoryUpdate = async function (req, res) {
     if (req.params.category_id > 0) {
         await Category.update(
@@ -151,3 +150,4 @@ exports.categoryFindOp = async function (req, res) {
             res.status(500).json({ message: err.message })
         })
 }
+*/

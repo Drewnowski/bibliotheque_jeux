@@ -83,20 +83,19 @@ exports.platformAddGame = async function (req, res) {
 
 const { Op } = require("sequelize");
 exports.platformFindOp = async function (req, res) {
-    await Platform.findAll({
-        where: {
-            platform_id:
-                { [Op.gt]: 2, [Op.lt]: 9 }
-        }
-    })
-        .then(data => {
-            res.json(data);
-        })
-        .catch(err => {
-            res.status(500).json({ message: err.message })
-        })
+    if (req.params.name) {
+        await Platform.findAll({
+            where: {name:{ [Op.startsWith]: req.params.name}}})
+            .then(data => {
+                res.json(data);
+            })
+            .catch(err => {
+                res.status(500).json({ message: err.message })
+            })
+    }
+    else res.status(400).json({ message: 'Bad input' })
 }
-
+/*
 exports.platformUpdate = async function (req, res) {
     if (req.params.platform_id > 0) {
         await Platform.update(
@@ -151,3 +150,4 @@ exports.platformFindOp = async function (req, res) {
             res.status(500).json({ message: err.message })
         })
 }
+*/
