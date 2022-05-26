@@ -36,8 +36,7 @@
     <h2>Platforms</h2>
     <ul>
         <li *ngFor="let p of platforms">
-            <button class="btnlistP" (click)="getplatformGames(p)">{{p.name}}</button>
-            <button class="addButton"></button>
+            <button (click)="getplatformGames(p)">{{p.name}}</button>
         </li>
     </ul>
 </div>
@@ -45,7 +44,7 @@
     <h2>Categories</h2>
     <ul>
         <li *ngFor="let c of categories">
-            <button class="btnlistC" (click)="getCategoryGames(c)">{{c.name}}</button>
+            <button (click)="getCategoryGames(c)">{{c.name}}</button>
             
         </li>
     </ul>

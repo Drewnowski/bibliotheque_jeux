@@ -24,7 +24,7 @@
     content: "\002B";
   }
 
-  .addButton {
+  /* .addButton {
   position: relative;
   border-width: 1px;
   border-style: solid;
@@ -33,4 +33,4 @@
   border-radius: 50%;
   cursor: pointer;
   transition: 0.3s all;
-  }
+  } */

@@ -18,29 +18,18 @@
             </li>
         </ul>
     </div>
-    <div>
-        <ul>
-            <li *ngFor="let gc of game.categories">
-                {{gc.name}}
-                <!-- <button  (click)="updateCategoryToRemove(gc.category_id)">{{gc.name}}</button> -->
-                
-            </li>
-        </ul>
-    </div>
     <h3>Platforms :</h3>
     <ul>
-        <li *ngFor="let gp of game.platforms">
-            {{gp.name}}
-            <button (click)="updatePlatformsToRemove(gp.platform_id)">{{gp.name}}</button> 
+        <li *ngFor="let ptc of platform_to_change">
+            {{ptc.name}}
+            <button (click)="updatePlatformsToRemove(ptc.platform_id)">{{ptc.name}}</button> 
         </li>
     </ul>
-    
 </div>
 
 <div>
     <button (click)="updateGame()">Save</button>
     <button (click)="cancelEdit()">Cancel</button>
-    <button (click)="test()">Test</button>
 </div>
 
 <div class="right">
