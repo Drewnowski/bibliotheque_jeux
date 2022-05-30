@@ -57,7 +57,7 @@ exports.platformDelete = async function (req, res) {
 
 exports.platformFindOne = async function (req, res) {
     if (req.params.platform_id) {
-        await Platform.findOne({ where: { platform_id: req.params.platform_id }, include: Game })
+        await Platform.findOne({ where: { platform_id: req.params.platform_id }, include: {model: Game, as:'games'} })
             .then(data => {
                 res.json(data);
             })

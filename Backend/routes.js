@@ -27,7 +27,7 @@ router.post('/category', categoryController.categoryCreate);
 router.put('/category/:category_id', categoryController.categoryUpdate);
 router.delete('/category/:category_id', categoryController.categoryDelete);
 router.get('/category/find/:category_id', categoryController.categoryFindOne);
- router.get('/category/filter/:name', categoryController.categoryFindOp);
+router.get('/category/filter/:name', categoryController.categoryFindOp);
 // router.post('/category/addGame/:category_id', categoryController.categoryAddGame);
 
 // platforms routes 

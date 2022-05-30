@@ -57,7 +57,7 @@ exports.categoryDelete = async function (req, res) {
 
 exports.categoryFindOne = async function (req, res) {
     if (req.params.category_id) {
-        await Category.findOne({ where: { category_id: req.params.category_id }, include: Game })
+        await Category.findOne({ where: { category_id: req.params.category_id }, include: {model: Game, as:'games'} })
             .then(data => {
                 res.json(data);
             })
