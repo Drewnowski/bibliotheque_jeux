@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Category, RestService } from '../rest.service';
 
 @Component({
   selector: 'app-category-add',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryAddComponent implements OnInit {
 
-  constructor() { }
+  category = {} as Category;
+  
+  constructor(public rest: RestService,private route: ActivatedRoute ,private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  addCategory(){
+    this.rest.createCategory(this.category).subscribe(
+      (result) =>{
+        this.router.navigate(['/games']);
+      },
+      (err) => {
+        console.log(err);
+      }
+    )
+  }
 }

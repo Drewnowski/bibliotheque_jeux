@@ -1,55 +1,84 @@
-<div class="games">
-    <h2>Games list</h2>
-    <form>Type
-        <input id="valuetofind" type="text" name="text">
-        <input type="submit" value="Find" (click)="findGameByName()">
-    </form>
-    <ul>
-        <li *ngFor="let fg of filtredGames">
-            {{fg.name}}
-        </li>
-    </ul>
-    <ul>
-        <li *ngFor="let pg of platformGames">
-            {{pg.name}}
-        </li>
-    </ul>
-    <ul>
-        <li *ngFor="let cg of categoryGames">
-            {{cg.name}}
-        </li>
-    </ul>
-    <ul>
-        <li *ngFor="let cpg of catPlatGames">
-            {{cpg.name}}
-        </li>
-    </ul>
-    <ul>
-        <li *ngFor="let g of games">
-            {{g.name}}
-            <button routerLink="/game_edit/{{g.game_id}}">Edit</button>
-            <button (click)="deleteGame(g.game_id)">Delete</button>
-        </li>
-    </ul>
-</div>
-<div class="left">
-    <h2>Platforms</h2>
-    <ul>
-        <li *ngFor="let p of platforms">
-            <button (click)="getplatformGames(p)">{{p.name}}</button>
-        </li>
-    </ul>
-</div>
-<div class="left">
-    <h2>Categories</h2>
-    <ul>
-        <li *ngFor="let c of categories">
-            <button (click)="getCategoryGames(c)">{{c.name}}</button>
-            
-        </li>
-    </ul>
-</div>
+<body class="container">
+    
 
-<div class="btn">
-    <button (click)="add()">Add new Game</button>
-</div>
+    <div class="games">
+        <h2>Games list</h2>
+        <form>Type
+            <input id="valuetofind" type="text" name="text">
+            <input type="submit" value="Find" (click)="findGameByName()">
+            <button (click)="showAllGames()">All</button>
+        </form>
+        
+        <div *ngIf="showAll==false">
+            <ul>
+                <li *ngFor="let fg of filtredGames">
+                    {{fg.name}}
+                </li>
+            </ul>
+            <h6>Same Category and Platform</h6>
+            <ul>
+                <li *ngFor="let cpg of catPlatGames">
+                    {{cpg.name}}
+                </li>
+            </ul>
+            <h6>by Platform</h6>
+            <ul>
+                <li *ngFor="let pg of platformGames">
+                    {{pg.name}}
+                </li>
+            </ul>
+            <h6>by Category</h6>
+            <ul>
+                <li *ngFor="let cg of categoryGames">
+                    {{cg.name}}
+                </li>
+            </ul>
+        </div>
+        
+        <div *ngIf="showAll">
+            <ul>
+                <li class="liGames" *ngFor="let g of games">
+                    {{g.name}}<br>
+                    {{g.cost}} €     
+                    <button class="btnLIGamesEditer" routerLink="/game_edit/{{g.game_id}}">Edit</button>
+                    <button class="btnLIGamesSupprimer" (click)="deleteGame(g.game_id)">Delete</button><br>
+                    {{g.memory}} MB
+                    
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="plt">
+        <h2>Platforms</h2>
+        <ul>
+            <li *ngFor="let p of platforms">
+                <button class="btnlist" (click)="getplatformGames(p)">{{p.name}}</button>
+            </li>
+        </ul>
+    </div>
+    <div class="btn">
+        <button class="btnAjouter" (click)="add()">Add new Game</button>
+    </div>
+    <div class="cat">
+        <h2>Categories</h2>
+        <ul>
+            <li *ngFor="let c of categories">
+                <button class="btnlist" (click)="getCategoryGames(c)">{{c.name}}</button>
+                <button (click)="showCategoryEditForm(c)">Edit</button>
+                <button (click)="deleteCategory(c.category_id)">Delete</button>
+            </li>
+        </ul>
+        <button (click)="showCategoryAddForm()">Add new Category</button>
+        <div *ngIf="showCategoryEdit">
+            <app-category-edit  [categoryE] = "categoryE"></app-category-edit>
+            <!-- <app-category-edit></app-category-edit> -->
+        </div>
+        <div *ngIf="showCategoryAdd">
+            <app-category-add></app-category-add>
+        </div>
+    </div>
+
+    
+
+</body>

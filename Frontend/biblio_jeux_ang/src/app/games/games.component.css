@@ -1,8 +1,48 @@
 
+.container {
+    display: flex;
+    box-shadow: -5px -5px 30px 5px blue, 5px 5px 30px 5px rgb(123, 113, 113);
+    /* float: initial; */
+    padding: 20px;
+    border: 3px solid #3821ad;
+    width: 900px;
+    height: 900px;
+    flex-wrap: wrap;
+    
+}
+
+.games {
+    flex-basis: 60%;
+}
+
+.plt {
+    flex-basis: 40%;
+}
+.btn {
+    flex-basis: 60%;
+}
+.cat {
+    flex-basis: 40%;
+}
+
+.liGames {
+    border: 2px solid rgb(111, 115, 104);
+    width: 350px;
+}
+.btnLIGamesSupprimer{
+    background: rgb(206, 93, 93);
+
+}
+.btnLIGamesEditer{
+    background: rgb(82, 157, 160)
+}
+.btnAjouter{
+    background: rgb(78, 171, 12)
+}
 /* div {
     display: flexbox;
     padding: 10px;
-    border: 3px solid #3821ad;
+    
 }
 .games {
     clear: left;
@@ -14,15 +54,16 @@
 
 }
  */
- .btnlistP { background:none; border:none; cursor: pointer;}
- .btnlistP:focus { background:rgb(173, 89, 251); border:none; }
  
+ .btnlist { background:none; border:none; cursor: pointer;}
+ .btnlist:focus { background:rgb(173, 89, 251); border:none; }
+ /*
  .btnlistC { background:none; border:none; cursor: pointer;}
  .btnlistC:focus { background:rgb(173, 89, 251); border:none; }
 
  span {
     content: "\002B";
-  }
+  }*/
 
   /* .addButton {
   position: relative;
@@ -34,3 +75,12 @@
   cursor: pointer;
   transition: 0.3s all;
   } */
+
+
+/* {
+    width: 250px;
+    height: 110px;
+    text-align: justify;
+    border: 1px solid black;
+    overflow: auto;
+} */

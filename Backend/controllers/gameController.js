@@ -134,7 +134,7 @@ where: {name:{ [Op.like]: 'Gothic 1'}}})//[Op.gt]: 2, [Op.lt]: 9//[Op.startsWith
             res.status(500).json({ message: err.message })
         })
 }
-
+/*
 exports.gameUpdate = async function (req, res) {
     if (req.params.game_id > 0) {
         await Game.update(
@@ -162,7 +162,7 @@ exports.gameDelete = async function (req, res) {
         })
     }
     else res.status(400).json({ message: 'Game not found'})
-}
+}*/
 
 // exports.gameFindOne = async function (req, res) {
 //     if (req.params.game_id) {

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category, Game, Platform, RestService } from '../rest.service';
+import { SharedService  } from '../shared.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -16,14 +18,22 @@ export class GamesComponent implements OnInit {
   platformGames: Game[] = [];
   categoryGames: Game[] = [];
   catPlatGames: Game[] = [];
+  showAll = true;
 
   platform = {} as Platform;
   platforms: Platform[] = [];
 
   category = {} as Category;
+  categoryE = {} as Category;
   categories: Category[] = [];
+  showCategoryEdit = false;
+  showCategoryAdd = false;
 
-  constructor(public rest: RestService,private route: ActivatedRoute ,private router: Router) { }
+  clickEventSubscription!: Subscription;
+
+  constructor(public rest: RestService,private route: ActivatedRoute ,private router: Router, private sharedService:SharedService) { 
+    this.clickEventSubscription = this.sharedService.getClickEvent().subscribe(()=>{this.showCategoryAddForm() })
+  }
 
   ngOnInit(): void {
     this.getGames();
@@ -58,6 +68,9 @@ export class GamesComponent implements OnInit {
       this.catPlatGames = this.platformGames.filter((a: Game) => this.categoryGames.some((b: Game) => a.game_id === b.game_id));
     }
   }
+  showAllGames(){
+    this.showAll = true;
+  }
 
   //==========Platforms================
   getPlatforms(){
@@ -70,6 +83,7 @@ export class GamesComponent implements OnInit {
   }
 
   getplatformGames(platform: Platform){
+    this.showAll = false;
     this.platformGames = platform.games;
     this.findGameByCatPlat();
   }
@@ -84,9 +98,25 @@ export class GamesComponent implements OnInit {
     );
   }
   getCategoryGames(category: Category){
+    this.showAll = false;
     this.categoryGames = category.games;
     this.findGameByCatPlat();
   }
-
-
+  showCategoryEditForm(categoryE: Category){
+    this.showCategoryEdit = !this.showCategoryEdit;
+    this.categoryE = categoryE
+    if(this.showCategoryAdd == true){
+      this.showCategoryAdd = false;
+    }
+  }
+  showCategoryAddForm(){
+    this.showCategoryAdd = !this.showCategoryAdd;
+    if(this.showCategoryEdit == true){
+      this.showCategoryEdit = false;
+    }
+  }
+  deleteCategory(id:number){
+    this.rest.deleteCategory(id).subscribe();
+    this.categories = this.categories.filter((category: Category) => category.category_id !== id); 
+  }
 }

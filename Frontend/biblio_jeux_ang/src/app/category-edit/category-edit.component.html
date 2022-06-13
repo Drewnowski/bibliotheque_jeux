@@ -1,1 +1,9 @@
-<p>category-edit works!</p>
+<h1>Category Edit</h1>
+<h3>Category Name</h3>
+<input type="text" [(ngModel)] = "category.name" placeholder="Name"><br>
+<h3>Categorie description</h3>
+<!-- <input type="text" [(ngModel)] = "category.description" placeholder="Description"><br> -->
+<textarea type="text" [(ngModel)] = "category.description" placeholder="Description"></textarea><br>
+<div>
+    <button (click)="updateCategory()">Save</button>
+</div>
