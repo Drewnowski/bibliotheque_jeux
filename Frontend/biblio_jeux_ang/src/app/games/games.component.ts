@@ -21,7 +21,10 @@ export class GamesComponent implements OnInit {
   showAll = true;
 
   platform = {} as Platform;
+  platformE = {} as Platform;
   platforms: Platform[] = [];
+  showPlatformEdit = false;
+  showPlatformAdd = false;
 
   category = {} as Category;
   categoryE = {} as Category;
@@ -86,6 +89,23 @@ export class GamesComponent implements OnInit {
     this.showAll = false;
     this.platformGames = platform.games;
     this.findGameByCatPlat();
+  }
+  showPlatformEditForm(platformE: Platform){
+    this.showPlatformEdit = !this.showPlatformEdit;
+    this.platformE = platformE
+    if(this.showPlatformAdd == true){
+      this.showPlatformAdd = false;
+    }
+  }
+  showPlatformAddForm(){
+    this.showPlatformAdd = !this.showPlatformAdd;
+    if(this.showPlatformEdit == true){
+      this.showPlatformEdit = false;
+    }
+  }
+  deletePlatform(id:number){
+    this.rest.deletePlatform(id).subscribe();
+    this.platforms = this.platforms.filter((platform: Platform) => platform.platform_id !== id); 
   }
 
   //==========Categories===============

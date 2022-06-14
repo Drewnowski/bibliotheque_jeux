@@ -1,1 +1,8 @@
-<p>platform-edit works!</p>
+<h1>Platform Edit</h1>
+<h3>Platform Name</h3>
+<input type="text" [(ngModel)] = "platform.name" placeholder="Name"><br>
+<h3>Platform description</h3>
+<textarea type="text" [(ngModel)] = "platform.description" placeholder="Description"></textarea><br>
+<div>
+    <button (click)="updatePlatform()">Save</button>
+</div>

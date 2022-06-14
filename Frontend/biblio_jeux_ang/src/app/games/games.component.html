@@ -8,26 +8,30 @@
             <input type="submit" value="Find" (click)="findGameByName()">
             <button (click)="showAllGames()">All</button>
         </form>
-        
+        <ul>
+            <li *ngFor="let fg of filtredGames"><br>
+                Titre :{{fg.name}}<br>
+                Description : {{fg.description}}<br>
+                Cout : {{fg.cost}}<br>
+                Memoire : {{fg.memory}}<br>
+                <button class="btnLIGamesEditer" routerLink="/game_edit/{{fg.game_id}}">Edit</button>
+            </li>
+        </ul>
         <div *ngIf="showAll==false">
-            <ul>
-                <li *ngFor="let fg of filtredGames">
-                    {{fg.name}}
-                </li>
-            </ul>
-            <h6>Same Category and Platform</h6>
+            
+            <h6>On both the Category and Platform:</h6>
             <ul>
                 <li *ngFor="let cpg of catPlatGames">
                     {{cpg.name}}
                 </li>
             </ul>
-            <h6>by Platform</h6>
+            <h6>On Platform:</h6>
             <ul>
                 <li *ngFor="let pg of platformGames">
                     {{pg.name}}
                 </li>
             </ul>
-            <h6>by Category</h6>
+            <h6>By Category:</h6>
             <ul>
                 <li *ngFor="let cg of categoryGames">
                     {{cg.name}}
@@ -49,17 +53,29 @@
         </div>
         
     </div>
+    
     <div class="plt">
         <h2>Platforms</h2>
         <ul>
             <li *ngFor="let p of platforms">
                 <button class="btnlist" (click)="getplatformGames(p)">{{p.name}}</button>
+                <button (click)="showPlatformEditForm(p)">Edit</button>
+                <button (click)="deletePlatform(p.platform_id)">Delete</button>
             </li>
         </ul>
+        <button (click)="showPlatformAddForm()">Add new Platform</button>
+        <div *ngIf="showPlatformEdit">
+            <app-platform-edit [platformE] = "platformE"></app-platform-edit>
+        </div>
+        <div *ngIf="showPlatformAdd">
+            <app-platform-add></app-platform-add>
+        </div>
     </div>
+
     <div class="btn">
         <button class="btnAjouter" (click)="add()">Add new Game</button>
     </div>
+
     <div class="cat">
         <h2>Categories</h2>
         <ul>
@@ -78,7 +94,4 @@
             <app-category-add></app-category-add>
         </div>
     </div>
-
-    
-
 </body>

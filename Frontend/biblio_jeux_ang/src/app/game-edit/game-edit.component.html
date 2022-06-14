@@ -1,19 +1,22 @@
-<div>
+<body class="container">
+    
+<div class="games">
     <h1>Game Edit</h1>
     <h3>Game Name</h3>
-    <input type="text" [(ngModel)] = "game.name" placeholder="Name"><br>
+    <input type="text" [(ngModel)] = "game.name" placeholder="Name">
     <h3>Game description</h3>
-    <input type="text" [(ngModel)] = "game.description" placeholder="Description"><br>
+    <!-- <input type="text" [(ngModel)] = "game.description" placeholder="Description"> -->
+    <textarea type="text" [(ngModel)] = "game.description" placeholder="Description"></textarea>
     <h3>Cost</h3>
-    <input type="number" [(ngModel)] = "game.cost" placeholder="Cost"><br>
+    <input type="number" [(ngModel)] = "game.cost" placeholder="Cost">
     <h3>Memory needed</h3>
-    <input type="number" [(ngModel)] = "game.memory" placeholder="Memory"><br>
+    <input type="number" [(ngModel)] = "game.memory" placeholder="Memory">
     <h3>Categories :</h3>
     <div>
         <ul>
             <li *ngFor="let gtc of category_to_change">
                 {{gtc.name}}
-                <button  (click)="updateCategoryToRemove(gtc.category_id)">Remove</button>
+                <button  class="btnSupprimer" (click)="updateCategoryToRemove(gtc.category_id)">Remove</button>
                 
             </li>
         </ul>
@@ -22,30 +25,12 @@
     <ul>
         <li *ngFor="let ptc of platform_to_change">
             {{ptc.name}}
-            <button (click)="updatePlatformsToRemove(ptc.platform_id)">{{ptc.name}}</button> 
+            <button class="btnSupprimer" (click)="updatePlatformsToRemove(ptc.platform_id)">Remove</button> 
         </li>
     </ul>
 </div>
 
-<div>
-    <button (click)="updateGame()">Save</button>
-    <button (click)="cancelEdit()">Cancel</button>
-</div>
-
-<div class="right">
-    <h2>Categories</h2>
-    <form>Enter the category name
-        <input id="categorytofind" type="text" name="text">
-        <input type="submit" value="Find" (click)="getFiltredCategory()">
-    </form>
-    <ul>
-        <li *ngFor="let fc of filtred_categories">
-            <button (click)="updateCategoryToAdd(fc)">{{fc.name}}</button>
-        </li>
-    </ul>
-</div>
-
-<div class="right">
+<div class="plt">
     <h2>Platforms</h2>
     <form>Enter the platform name
         <input id="platformtofind" type="text" name="text">
@@ -53,10 +38,29 @@
     </form>
     <ul>
         <li *ngFor="let fp of filtred_platforms">
-            <button (click)="updatePlatformsToAdd(fp)">{{fp.name}}</button>
+            <button (click)="updatePlatformsToAdd(fp)">{{fp.name}}</button><br>
+            Description :{{fp.description}}
         </li>
     </ul>
 </div>
 
+<div class="btn">
+    <button class="btnAjouter" (click)="updateGame()">Save</button>
+    <button class="btnBluer" (click)="cancelEdit()">Cancel</button>
+</div>
 
+<div class="cat">
+    <h2>Categories</h2>
+    <form>Enter the category name
+        <input id="categorytofind" type="text" name="text">
+        <input type="submit" value="Find" (click)="getFiltredCategory()">
+    </form>
+    <ul>
+        <li *ngFor="let fc of filtred_categories">
+            <button (click)="updateCategoryToAdd(fc)">{{fc.name}}</button><br>
+            Description :{{fc.description}}
+        </li>
+    </ul>
+</div>
 
+</body>
