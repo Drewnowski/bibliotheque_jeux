@@ -34,10 +34,14 @@
 
 }
 .btnLIGamesEditer{
-    background: rgb(82, 157, 160)
+    background: rgb(82, 157, 160);
+    /* padding-block: right; */
 }
 .btnAjouter{
     background: rgb(78, 171, 12)
+}
+.btnInLi{
+    text-align: right;
 }
 /* div {
     display: flexbox;

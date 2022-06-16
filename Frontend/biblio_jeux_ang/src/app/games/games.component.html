@@ -43,11 +43,12 @@
             <ul>
                 <li class="liGames" *ngFor="let g of games">
                     {{g.name}}<br>
-                    {{g.cost}} €     
-                    <button class="btnLIGamesEditer" routerLink="/game_edit/{{g.game_id}}">Edit</button>
-                    <button class="btnLIGamesSupprimer" (click)="deleteGame(g.game_id)">Delete</button><br>
-                    {{g.memory}} MB
-                    
+                    Cost :{{g.cost}} € <br>    
+                    Memory :{{g.memory}} MB 
+                    <div class="btnInLi">      
+                        <button class="btnLIGamesEditer" routerLink="/game_edit/{{g.game_id}}">Edit</button>
+                        <button class="btnLIGamesSupprimer" (click)="deleteGame(g.game_id)">Delete</button><br>
+                    </div>  
                 </li>
             </ul>
         </div>
@@ -88,7 +89,6 @@
         <button (click)="showCategoryAddForm()">Add new Category</button>
         <div *ngIf="showCategoryEdit">
             <app-category-edit  [categoryE] = "categoryE"></app-category-edit>
-            <!-- <app-category-edit></app-category-edit> -->
         </div>
         <div *ngIf="showCategoryAdd">
             <app-category-add></app-category-add>
